@@ -57,4 +57,9 @@ public class ConectaPostgres {
             onConClose.printStackTrace();
         }
     }
+
+    public Connection getCon() {
+        return con;
+    }
+
 }
