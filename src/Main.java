@@ -1,13 +1,34 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println(String.format("Hello and welcome!"));
+import Repositories.estado.EstadoRepository;
+import conectaDB.ConectaPostgres;
 
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        String driver = "org.postgresql.Driver";
+        String user   = "postgres";
+        String senha = "12345";
+        String url = "jdbc:postgresql://localhost:5432/dbHistorico_Vacina";
+
+        try {
+
+            Connection con = null;
+            Class.forName(driver);
+            con = (Connection) DriverManager.getConnection(url, user, senha);
+            System.out.println("Conexão realizada com sucesso.");
+
+        }catch(Exception e)
+        {
+            System.err.print(e.getMessage());
+        }
+
+        ConectaPostgres banco = new ConectaPostgres();
+
+        String password = "12345";
+
+        banco.Conectar(url, user, password);
     }
 }
