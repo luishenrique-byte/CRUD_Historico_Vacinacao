@@ -10,11 +10,9 @@ import java.util.List;
 public class EstadoRepository implements IEstadoRepository{
 
     private Connection _context;
-    private Statement stmt;
 
-    public EstadoRepository(Connection _context, Statement stmt) {
+    public EstadoRepository(Connection _context) {
         this._context = _context;
-        this.stmt = stmt;
     }
 
     @Override
@@ -43,6 +41,8 @@ public class EstadoRepository implements IEstadoRepository{
         List<Estado> estadoList = new ArrayList<>();
         try {
 
+            Statement stmt = _context.createStatement();
+
             ResultSet result = stmt.executeQuery(query);
             while (result.next()){
 
@@ -66,6 +66,9 @@ public class EstadoRepository implements IEstadoRepository{
 
         String nome;
         try{
+
+            Statement stmt = _context.createStatement();
+
             ResultSet result = stmt.executeQuery(query);
 
             if (result.next()) {
