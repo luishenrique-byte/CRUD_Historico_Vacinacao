@@ -10,5 +10,5 @@ public interface IEstadoRepository {
     public Boolean createEstado(String nome); // Retorna Boolean para saber se alguma linha foi criada
     public List<Estado> getAllEstados();
     public Estado getEstadoById(long id);
-    public Integer updateEstado(long id, String nome);
+    public Integer updateEstado(Estado estado);
 }

@@ -85,22 +85,22 @@ public class EstadoRepository implements IEstadoRepository{
     }
 
     @Override
-    public Integer updateEstado(long id, String nome) {
+    public Integer updateEstado(Estado estado) {
 
         String query = "UPDATE estado SET nome = ? WHERE id_estado = ?";
 
         try{
 
             PreparedStatement ps = _context.prepareStatement(query);
-            ps.setString(1, nome);
-            ps.setLong(2, id);
+            ps.setString(1, estado.nome);
+            ps.setLong(2, estado.id);
 
             Integer linhas = ps.executeUpdate();
 
             return linhas;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.getMessage();
             return null;
         }
     }

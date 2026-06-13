@@ -47,9 +47,9 @@ public class EstadoService implements IEstadoService{
 
     @Override
     public void modificarNomeEstado(long id, String nome) {
-        Integer qtdeLinhas = _repository.updateEstado(id, nome);
+        Integer qtdeLinhas = _repository.updateEstado(new Estado(id, nome));
 
-        if (qtdeLinhas != null) {
+        if (qtdeLinhas != null && qtdeLinhas>0) {
             System.out.println("Operação realizada com sucessor.");
             System.out.println(qtdeLinhas + " linha afetada.");
         } else {
