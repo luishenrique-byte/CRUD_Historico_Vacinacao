@@ -16,7 +16,7 @@ public class EstadoRepository implements IEstadoRepository{
     }
 
     @Override
-    public Boolean createEstado(String nome) {
+    public Integer createEstado(String nome) {
         String query = "INSERT INTO estado(nome) VALUES (?)";
 
         try{
@@ -25,7 +25,7 @@ public class EstadoRepository implements IEstadoRepository{
 
             ps.setString(1,nome);
 
-            Boolean linhasCriada = ps.execute();
+            Integer linhasCriada = ps.executeUpdate();
             return linhasCriada;
 
         } catch (SQLException e){

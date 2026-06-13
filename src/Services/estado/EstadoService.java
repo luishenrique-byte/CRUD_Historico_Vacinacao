@@ -16,12 +16,12 @@ public class EstadoService implements IEstadoService{
 
     @Override
     public void adicionarEstado(String nome) {
-        Boolean criado = _repository.createEstado(nome);
+        Integer criado = _repository.createEstado(nome);
 
-        if (criado != null){
+        if (criado != null && criado > 0){
             System.out.println("Estado adicionado com sucesso.");
         } else {
-            System.out.println("Estado não encontrado a partir desse ID.");
+            System.out.println("Não foi possível criar.");
         }
     }
 
