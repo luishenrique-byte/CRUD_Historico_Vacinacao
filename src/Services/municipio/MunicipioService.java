@@ -43,7 +43,7 @@ public class MunicipioService implements IMunicipioService {
         if (m != null){
             System.out.println("[ "+m.id_municipio+" | "+m.nome+" | "+m.nome_estado+" ]");
         } else {
-            System.out.println("Estado não encontrado a partir desse ID.");
+            System.out.println("Município não encontrado a partir desse ID.");
         }
     }
 
