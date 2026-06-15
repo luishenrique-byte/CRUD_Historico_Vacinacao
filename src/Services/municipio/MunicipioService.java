@@ -51,6 +51,11 @@ public class MunicipioService implements IMunicipioService {
     public void modicarNomeMunicipio(long id, String nome) {
         Municipio m = _repository.getMunicipioById(id);
 
+        if (m != null){
+            System.out.println("Município não encontrado para esse ID.");
+            return;
+        }
+
         Integer qtdeLinhas = _repository.updateMunicipio(new Municipio(id,nome, m.id_estado, m.nome_estado));
 
         if (qtdeLinhas != null && qtdeLinhas>0) {
