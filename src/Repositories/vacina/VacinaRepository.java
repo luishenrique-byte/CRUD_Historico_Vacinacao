@@ -83,13 +83,17 @@ public class VacinaRepository implements IVacinaRepository{
 
             Statement stmt = _context.createStatement();
 
-            ResultSet resultSet = stmt.executeQuery(query);
+            ResultSet result = stmt.executeQuery(query);
 
-            return new Vacina(resultSet.getLong("id_vacina"),
-                            resultSet.getString("vacina"),
-                            resultSet.getInt("intervalo_doses"),
-                            resultSet.getLong("id_fabricante"),
-                            resultSet.getString("fabricante"));
+            if (result.next()){
+                return new Vacina(result.getLong("id_vacina"),
+                                result.getString("vacina"),
+                                result.getInt("intervalo_doses"),
+                                result.getLong("id_fabricante"),
+                                result.getString("fabricante"));
+            }
+
+            return null;
 
         } catch (SQLException e){
             System.out.println(e.getMessage());
