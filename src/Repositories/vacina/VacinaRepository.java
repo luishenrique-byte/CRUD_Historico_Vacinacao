@@ -17,7 +17,7 @@ public class VacinaRepository implements IVacinaRepository{
 
 
     @Override
-    public Integer createVacina(String nome, long id_fabricante, int intervalo_doses) {
+    public Integer createVacina(String nome, long id_fabricante, Integer intervalo_doses) {
         String query = "INSERT INTO vacina(nome, id_fabricante, intervalo_doses) values (?, ?, ?);";
 
         try{

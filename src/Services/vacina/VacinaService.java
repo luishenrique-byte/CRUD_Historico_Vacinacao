@@ -11,7 +11,7 @@ public class VacinaService implements IVacinaService{
     }
 
     @Override
-    public void adicionarVacina(String nome, long id_fabricante, int intervalo_doses) {
+    public void adicionarVacina(String nome, long id_fabricante, Integer intervalo_doses) {
         Integer linhaCriada = _repository.createVacina(nome, id_fabricante, intervalo_doses);
 
         if (linhaCriada != null && linhaCriada > 0){
