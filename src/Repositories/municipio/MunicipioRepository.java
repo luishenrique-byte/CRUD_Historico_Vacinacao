@@ -1,6 +1,5 @@
 package Repositories.municipio;
 
-import Models.Estado;
 import Models.Municipio;
 
 import java.sql.*;
@@ -9,7 +8,7 @@ import java.util.List;
 
 public class MunicipioRepository implements IMunicipioRepository{
 
-    private Connection _context;
+    private final Connection _context;
 
 
     public MunicipioRepository(Connection _context) {

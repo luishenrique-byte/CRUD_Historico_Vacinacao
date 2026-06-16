@@ -7,7 +7,7 @@ import java.util.List;
 
 public class FabricanteService implements IFabricanteService{
 
-    private IFabricanteRepository _repository;
+    private final IFabricanteRepository _repository;
 
     public FabricanteService(IFabricanteRepository _repository) {
         this._repository = _repository;

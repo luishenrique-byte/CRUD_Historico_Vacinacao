@@ -9,7 +9,7 @@ import java.util.List;
 
 public class PacienteRepository implements IPacienteRepository{
 
-    private Connection _context;
+    private final Connection _context;
 
     public PacienteRepository(Connection _context) {
         this._context = _context;

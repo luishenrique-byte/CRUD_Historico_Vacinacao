@@ -10,7 +10,7 @@ import java.util.List;
 
 public class PacienteService implements IPacienteService {
 
-    private IPacienteRepository _repository;
+    private final IPacienteRepository _repository;
 
     private static final String CPF_REGEX = "^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$|^\\d{11}$";
 

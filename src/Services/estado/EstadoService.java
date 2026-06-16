@@ -8,7 +8,7 @@ import java.util.List;
 
 public class EstadoService implements IEstadoService{
 
-    private EstadoRepository _repository;
+    private final EstadoRepository _repository;
 
     public EstadoService(EstadoRepository _repository) {
         this._repository = _repository;

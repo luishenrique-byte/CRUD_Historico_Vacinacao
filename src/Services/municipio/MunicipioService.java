@@ -1,6 +1,5 @@
 package Services.municipio;
 
-import Models.Estado;
 import Models.Municipio;
 import Repositories.municipio.MunicipioRepository;
 
@@ -8,7 +7,7 @@ import java.util.List;
 
 public class MunicipioService implements IMunicipioService {
 
-    MunicipioRepository _repository;
+    private final MunicipioRepository _repository;
 
     public MunicipioService(MunicipioRepository _repository) {
         this._repository = _repository;

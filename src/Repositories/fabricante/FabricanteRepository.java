@@ -8,7 +8,7 @@ import java.util.List;
 
 public class FabricanteRepository implements IFabricanteRepository{
 
-    private Connection _context;
+    private final Connection _context;
 
     public FabricanteRepository(Connection _context) {
         this._context = _context;

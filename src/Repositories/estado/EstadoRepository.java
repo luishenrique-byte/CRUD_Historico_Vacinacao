@@ -9,7 +9,7 @@ import java.util.List;
 
 public class EstadoRepository implements IEstadoRepository{
 
-    private Connection _context;
+    private final Connection _context;
 
     public EstadoRepository(Connection _context) {
         this._context = _context;

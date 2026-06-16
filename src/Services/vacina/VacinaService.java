@@ -7,7 +7,7 @@ import java.util.List;
 
 public class VacinaService implements IVacinaService{
 
-    IVacinaRepository _repository;
+    private final IVacinaRepository _repository;
 
     public VacinaService(IVacinaRepository _repository) {
         this._repository = _repository;

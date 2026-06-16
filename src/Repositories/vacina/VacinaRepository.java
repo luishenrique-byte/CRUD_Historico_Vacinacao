@@ -9,7 +9,7 @@ import java.util.Stack;
 
 public class VacinaRepository implements IVacinaRepository{
 
-    private Connection _context;
+    private final Connection _context;
 
     public VacinaRepository(Connection _context) {
         this._context = _context;
