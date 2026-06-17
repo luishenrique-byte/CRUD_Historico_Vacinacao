@@ -50,7 +50,7 @@ public class MunicipioService implements IMunicipioService {
     public void modicarNomeMunicipio(long id, String nome) {
         Municipio m = _repository.getMunicipioById(id);
 
-        if (m != null){
+        if (m == null){
             System.out.println("Município não encontrado para esse ID.");
             return;
         }

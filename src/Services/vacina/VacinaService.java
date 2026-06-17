@@ -51,7 +51,7 @@ public class VacinaService implements IVacinaService{
     public void modicarNomeVacina(long id, String novoNome) {
         Vacina v = _repository.getVacinaById(id);
 
-        if (v != null){
+        if (v == null){
             System.out.println("Vacina não encontrada para esse ID.");
             return;
         }
