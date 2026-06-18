@@ -12,8 +12,6 @@ public class PacienteService implements IPacienteService {
 
     private final IPacienteRepository _repository;
 
-    private static final String CPF_REGEX = "^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$|^\\d{11}$";
-
     public PacienteService(IPacienteRepository _repository) {
         this._repository = _repository;
     }
@@ -98,7 +96,8 @@ public class PacienteService implements IPacienteService {
                 pac.numero,
                 pac.cep,
                 pac.id_municipio,
-                pac.nome_municipio));
+                pac.nome_municipio,
+                pac.ativo));
 
         if (qtdeLinhas != null && qtdeLinhas > 0) {
             System.out.println("Operação realizada com sucessor.");
@@ -125,7 +124,8 @@ public class PacienteService implements IPacienteService {
                 pac.numero,
                 pac.cep,
                 pac.id_municipio,
-                pac.nome_municipio));
+                pac.nome_municipio,
+                pac.ativo));
 
         if (qtdeLinhas != null && qtdeLinhas > 0) {
             System.out.println("Operação realizada com sucessor.");
@@ -158,7 +158,8 @@ public class PacienteService implements IPacienteService {
                 pac.numero,
                 pac.cep,
                 pac.id_municipio,
-                pac.nome_municipio));
+                pac.nome_municipio,
+                pac.ativo));
 
         if (qtdeLinhas != null && qtdeLinhas > 0) {
             System.out.println("Operação realizada com sucessor.");
@@ -184,7 +185,9 @@ public class PacienteService implements IPacienteService {
                 rua,
                 numero,
                 cep,
-                id_municipio));
+                id_municipio,
+                null,        // nome_municipio - não importa pro UPDATE
+                pac.ativo));
 
         if (qtdeLinhas != null && qtdeLinhas > 0) {
             System.out.println("Operação realizada com sucessor.");

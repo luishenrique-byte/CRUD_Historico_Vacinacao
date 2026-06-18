@@ -15,7 +15,7 @@ public class Paciente {
     public Boolean ativo;
 
     public Paciente(Long id, String nome, LocalDate data_nascimento, String cpf,
-                    String rua, Integer numero, String cep, Long id_municipio, String nome_municipio) {
+                    String rua, Integer numero, String cep, Long id_municipio, String nome_municipio, Boolean ativo) {
         this.id = id;
         this.nome = nome;
         this.data_nascimento = data_nascimento;
@@ -25,12 +25,6 @@ public class Paciente {
         this.cep = cep;
         this.id_municipio = id_municipio;
         this.nome_municipio = nome_municipio;
-        this.ativo = true;
-    }
-
-    // Construtor para ESCRITA (UPDATE/INSERT) — sem nome_municipio
-    public Paciente(Long id, String nome, LocalDate data_nascimento, String cpf,
-                    String rua, Integer numero, String cep, Long id_municipio) {
-        this(id, nome, data_nascimento, cpf, rua, numero, cep, id_municipio, null);
+        this.ativo = ativo;
     }
 }

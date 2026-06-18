@@ -58,7 +58,8 @@ public class PacienteRepository implements IPacienteRepository{
                 "numero, \n" +
                 "cep, \n" +
                 "paciente.id_municipio,\n" +
-                "municipio.nome AS municipio\n" +
+                "municipio.nome AS municipio,\n" +
+                "ativo\n" +
                 "FROM paciente\n" +
                 "INNER JOIN municipio\n" +
                 "ON municipio.id_municipio = paciente.id_municipio\n" +
@@ -83,8 +84,9 @@ public class PacienteRepository implements IPacienteRepository{
                 String cep = result.getString("cep");
                 Long id_munipio = result.getLong("id_municipio");
                 String nome_municipio = result.getString("municipio");
+                Boolean ativo = result.getBoolean("ativo");
 
-                pacienteList.add(new Paciente(id_paciente, nome,data_nascimento,cpf,rua,numero,cep,id_munipio,nome_municipio));
+                pacienteList.add(new Paciente(id_paciente, nome,data_nascimento,cpf,rua,numero,cep,id_munipio,nome_municipio,ativo));
 
             }
 
@@ -106,7 +108,8 @@ public class PacienteRepository implements IPacienteRepository{
                 "numero, \n" +
                 "cep, \n" +
                 "paciente.id_municipio,\n" +
-                "municipio.nome AS municipio\n" +
+                "municipio.nome AS municipio,\n" +
+                "ativo\n" +
                 "FROM paciente\n" +
                 "INNER JOIN municipio\n" +
                 "ON municipio.id_municipio = paciente.id_municipio\n" +
@@ -128,8 +131,9 @@ public class PacienteRepository implements IPacienteRepository{
                 String cep = result.getString("cep");
                 Long id_munipio = result.getLong("id_municipio");
                 String nome_municipio = result.getString("municipio");
+                Boolean ativo = result.getBoolean("ativo");
 
-                return new Paciente(id_paciente, nome,data_nascimento,cpf,rua,numero,cep,id_munipio,nome_municipio);
+                return new Paciente(id_paciente, nome,data_nascimento,cpf,rua,numero,cep,id_munipio,nome_municipio,ativo);
             }
 
             return null;
