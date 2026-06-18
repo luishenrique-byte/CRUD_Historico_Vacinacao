@@ -11,4 +11,6 @@ public interface IRegistroService {
     public void mostrarQtdeDoses(long id_pac); //Chama uma function
     public void mostrarQtdeDosesXVacina(long id_pac); //Chama uma function
     public void mostrarProximaDose(long id_pac);
+    public void listarTodosRegistrosAtivos();
+    public void listarAtendimentosPorProfissional();
 }

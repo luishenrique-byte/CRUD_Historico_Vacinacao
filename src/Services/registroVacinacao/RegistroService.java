@@ -133,4 +133,37 @@ public class RegistroService implements IRegistroService{
             System.out.println("[ "+p.nome_paciente + " | "+p.vacina + " | " + p.data_vacinacao_atual + " | " +p.data_prox_dose +" ]");
         }
     }
+
+    @Override
+    public void listarTodosRegistrosAtivos() {
+        List<HistoricoVacinacao> histVacList = _repository.callViewHistorico();
+
+        System.out.println("[ vacina | data_vacinacao | validade | lote | paciente | profissional | unidade ]");
+        for (HistoricoVacinacao hv : histVacList) {
+            System.out.println("[ "
+                    + hv.nome_vacina + " | "
+                    + hv.data_vacinacao + " | "
+                    + hv.validade + " | "
+                    + hv.lote + " | "
+                    + hv.nome_paciente + " | "
+                    + hv.nome_colaborador + " | "
+                    + hv.unidade + " ]");
+        }
+    }
+
+    @Override
+    public void listarAtendimentosPorProfissional() {
+        List<AtendimentoPorProfissional> atendimentoList = _repository.callViewAtendXProf();
+
+        System.out.println("[ id_profissional | profissional | id_paciente | paciente | unidade | data_atendimento");
+        for (AtendimentoPorProfissional a : atendimentoList) {
+            System.out.println("[ "
+                    + a.id_profissional + " | "
+                    + a.nome_colaborador + " | "
+                    + a.id_paciente + " | "
+                    + a.nome_paciente + " | "
+                    + a.unidade + " | "
+                    + a.data_atendimento + " ]");
+        }
+    }
 }
