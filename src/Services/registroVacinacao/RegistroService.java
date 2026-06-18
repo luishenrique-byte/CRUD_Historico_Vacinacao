@@ -1,7 +1,11 @@
 package Services.registroVacinacao;
 
 import Models.RegistroVacinacao;
-
+import Models.for_functions.ProximaDose;
+import Models.for_functions.QtdeDoses;
+import Models.for_functions.QtdeDosesXVacina;
+import Models.for_view.AtendimentoPorProfissional;
+import Models.for_view.HistoricoVacinacao;
 import Repositories.registroVacinacao.IRegistroRepository;
 
 import java.sql.Date;
@@ -90,5 +94,43 @@ public class RegistroService implements IRegistroService{
         }
     }
 
+    @Override
+    public void mostrarQtdeDoses(long id_pac) {
+        QtdeDoses qtdeDoses = _repository.callFuncQtdeDoses(id_pac);
 
+        if (qtdeDoses != null){
+            System.out.println("[ nome_paciente | qtde_doses]");
+            System.out.println("[ "+qtdeDoses.nome_paciente + " | " + qtdeDoses.qtde_doses + " ]");
+        } else {
+            System.out.println("Função não retornou nada.");
+        }
+    }
+
+    @Override
+    public void mostrarQtdeDosesXVacina(long id_pac) {
+        List<QtdeDosesXVacina> dxv = _repository.callFuncQtdeDosesXVacina(id_pac);
+
+        if (dxv == null){
+            System.out.println("Função sem retorno. Verifique o ID.");
+        }
+
+            System.out.println("[ vacina | qtde_doses]");
+        for (QtdeDosesXVacina q : dxv){
+            System.out.println("[ "+q.vacina + " | " + q.qtde_doses + " ]");
+        }
+    }
+
+    @Override
+    public void mostrarProximaDose(long id_pac) {
+        List<ProximaDose> proximaDoseList = _repository.callFuncProxDose(id_pac);
+
+        if (proximaDoseList == null){
+            System.out.println("Função sem retorno. Verifique o ID.");
+        }
+
+            System.out.println("[ nome_paciente | vacina | data_vacinacao_atual | data_prox_dose]");
+        for (ProximaDose p : proximaDoseList){
+            System.out.println("[ "+p.nome_paciente + " | "+p.vacina + " | " + p.data_vacinacao_atual + " | " +p.data_prox_dose +" ]");
+        }
+    }
 }

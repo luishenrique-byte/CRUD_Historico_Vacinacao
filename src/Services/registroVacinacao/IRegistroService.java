@@ -8,5 +8,7 @@ public interface IRegistroService {
     public void listarTodosRegistros();
     public void mostrarRegistroPorId(long id);
     public void modificarLote(long id, String lote);
-
+    public void mostrarQtdeDoses(long id_pac); //Chama uma function
+    public void mostrarQtdeDosesXVacina(long id_pac); //Chama uma function
+    public void mostrarProximaDose(long id_pac);
 }
