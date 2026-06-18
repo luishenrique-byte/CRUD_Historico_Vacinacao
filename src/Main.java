@@ -1,15 +1,24 @@
+
 import Repositories.estado.EstadoRepository;
 import Repositories.fabricante.FabricanteRepository;
-import Repositories.fabricante.IFabricanteRepository;
 import Repositories.municipio.MunicipioRepository;
+import Repositories.paciente.PacienteRepository;
+import Repositories.profissional.ProfissionalRepository;
+import Repositories.registroVacinacao.RegistroRepository;
+import Repositories.unidadeAtendimento.UnidadeRepository;
+import Repositories.vacina.VacinaRepository;
 import Services.estado.EstadoService;
 import Services.fabricante.FabricanteService;
-import Services.fabricante.IFabricanteService;
 import Services.municipio.MunicipioService;
+import Services.paciente.PacienteService;
+import Services.profissional.ProfissionalService;
+import Services.registroVacinacao.RegistroService;
+import Services.unidadeAtendimento.UnidadeService;
+import Services.vacina.VacinaService;
+import UI.MenuUI;
 import conectaDB.ConectaPostgres;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.*;
 
 public class Main {
 
@@ -38,28 +47,19 @@ public class Main {
 
         banco.Conectar(url, user, password);
 
+        MenuUI menu = new MenuUI(
+                new EstadoService(new EstadoRepository(banco.getCon())),
+                new MunicipioService(new MunicipioRepository(banco.getCon())),
+                new FabricanteService(new FabricanteRepository(banco.getCon())),
+                new VacinaService(new VacinaRepository(banco.getCon())),
+                new PacienteService(new PacienteRepository(banco.getCon())),
+                new ProfissionalService(new ProfissionalRepository(banco.getCon())),
+                new UnidadeService(new UnidadeRepository(banco.getCon())),
+                new RegistroService(new RegistroRepository(banco.getCon()))
+        );
 
-//        ===============================
-//        EstadoRepository repository = new EstadoRepository(banco.getCon());
-//        EstadoService service = new EstadoService(repository);
-//        service.modificarNomeEstado(1, "Bahia");
+        menu.iniciar();
 
-//        ========================================
-        MunicipioRepository repository = new MunicipioRepository(banco.getCon());
-        MunicipioService service = new MunicipioService(repository);
-//        service.listaTodosMunicipios();
-        service.mostrarMunicipioPorId(100);
-//        service.modicarNomeMunicipio(12,"melhor teste que tem");
-
-//        ===========================
-//        IFabricanteRepository repo = new FabricanteRepository(banco.getCon());
-//        IFabricanteService service = new FabricanteService(repo);
-//        service.adicionarFabricante("TESTE 14/06");
-//        service.listarTodosFabricante();
-//        service.mostrarFabricantePorId(5);
-//        service.modificarNomeFabricante(4,"Melhor TESTE 14/06");
-
-        //==================================
-
+        banco.Desconectar();
     }
 }
