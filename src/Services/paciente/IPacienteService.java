@@ -23,4 +23,6 @@ public interface IPacienteService {
                                   Integer numero,
                                   String cep,
                                   Long id_municipio);
+    public void inativarPaciente(long id);
+    public void ativarPaciente(long id);
 }

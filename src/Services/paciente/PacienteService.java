@@ -193,4 +193,38 @@ public class PacienteService implements IPacienteService {
             System.out.println("Nenhuma linha foi afetada. Reveja o ID.");
         }
     }
+
+    @Override
+    public void inativarPaciente(long id) {
+        Paciente pac = _repository.getPacienteById(id);
+
+        if (pac == null){
+            System.out.println("Paciente não encontrada para esse ID.");
+            return;
+        }
+
+        if (!pac.ativo){
+            System.out.println("O Paciente encontrado por esse ID já se encontrar INATIVO");
+        } else {
+            _repository.callProcInativar(id);
+            System.out.println("O Paciente: " + pac.id + " - " + pac.nome + " foi INATIVO com sucesso.");
+        }
+    }
+
+    @Override
+    public void ativarPaciente(long id) {
+        Paciente pac = _repository.getPacienteById(id);
+
+        if (pac == null){
+            System.out.println("Paciente não encontrada para esse ID.");
+            return;
+        }
+
+        if (pac.ativo){
+            System.out.println("O Paciente encontrado por esse ID já se encontrar ATIVO");
+        } else {
+            _repository.callProcAtivar(id);
+            System.out.println("O Paciente: " + pac.id + " - " + pac.nome + " foi ATIVO com sucesso.");
+        }
+    }
 }

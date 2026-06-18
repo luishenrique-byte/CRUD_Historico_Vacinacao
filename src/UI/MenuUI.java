@@ -267,6 +267,8 @@ public class MenuUI {
             System.out.println("5 - Modificar data de nascimento");
             System.out.println("6 - Modificar CPF");
             System.out.println("7 - Modificar endereço");
+            System.out.println("8 - Inativar Paciente (Procedure)");
+            System.out.println("9 - Ativar Paciente (Procedure)");
             System.out.println("0 - Voltar");
             System.out.print("Escolha uma opção: ");
 
@@ -329,6 +331,16 @@ public class MenuUI {
                     System.out.print("Novo ID do Município: ");
                     Long idMunicipio = lerLong();
                     pacienteService.modificarEndereco(id, rua, numero, cep, idMunicipio);
+                }
+                case 8 -> {
+                    System.out.print("ID do Paciente: ");
+                    long id = lerLong();
+                    pacienteService.inativarPaciente(id);
+                }
+                case 9 -> {
+                    System.out.print("ID do Paciente: ");
+                    long id = lerLong();
+                    pacienteService.ativarPaciente(id);
                 }
                 case 0 -> System.out.println("Voltando ao menu principal...");
                 default -> System.out.println("Opção inválida.");

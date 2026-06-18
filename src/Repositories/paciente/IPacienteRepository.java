@@ -16,4 +16,6 @@ public interface IPacienteRepository {
     public List<Paciente> getAllPaciente();
     public Paciente getPacienteById(long id);
     public Integer updatePaciente(Paciente paciente);
+    public void callProcInativar(long id);
+    public void callProcAtivar(long id);
 }

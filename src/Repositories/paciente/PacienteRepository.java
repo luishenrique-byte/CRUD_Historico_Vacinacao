@@ -175,4 +175,42 @@ public class PacienteRepository implements IPacienteRepository{
             return null;
         }
     }
+
+    @Override
+    public void callProcInativar(long id) {
+        String query = "CALL proc_inativar_pac(?)";
+
+        try {
+
+            CallableStatement cs = _context.prepareCall(query);
+
+            cs.setLong(1, id);
+
+            cs.execute();
+
+            System.out.println("Inativação registrada via procedure com sucesso.");
+
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Override
+    public void callProcAtivar(long id) {
+        String query = "CALL proc_ativar_pac(?)";
+
+        try {
+
+            CallableStatement cs = _context.prepareCall(query);
+
+            cs.setLong(1, id);
+
+            cs.execute();
+
+            System.out.println("Ativação registrada via procedure com sucesso.");
+
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
 }
