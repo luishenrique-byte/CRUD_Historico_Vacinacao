@@ -319,4 +319,69 @@ public class RegistroRepository implements IRegistroRepository{
             return null;
         }
     }
+
+    @Override
+    public List<HistoricoVacinacao> callViewHistorico() {
+        String query = "SELECT * FROM vw_registro_vacinacao";
+
+        List<HistoricoVacinacao> historicoList = new ArrayList<>();
+
+        try {
+
+            Statement stmt = _context.createStatement();
+
+            ResultSet result = stmt.executeQuery(query);
+
+            while (result.next()){
+                String nome_vacina = result.getString("nome_vacina");
+                Date data_vacinacao = result.getDate("data_vacinacao");
+                Date validade = result.getDate("validade");
+                String lote = result.getString("lote");
+                String nome_paciente = result.getString("nome_paciente");
+                String nome_colaborador = result.getString("nome_colaborador");
+                String unidade = result.getString("unidade");
+
+                historicoList.add(new HistoricoVacinacao(nome_vacina, data_vacinacao, validade, lote, nome_paciente, nome_colaborador, unidade));
+            }
+
+            return historicoList;
+
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public List<AtendimentoPorProfissional> callViewAtendXProf() {
+        String query = "SELECT * FROM vw_atendimentos_por_profissional";
+
+        List<AtendimentoPorProfissional> atendimentoList = new ArrayList<>();
+
+        try {
+
+            Statement stmt = _context.createStatement();
+
+            ResultSet result = stmt.executeQuery(query);
+
+            while (result.next()){
+
+                Long id_profissional = result.getLong("id_profissional");
+                String nome_colaborador = result.getString("nome_colaborador");
+                Long id_paciente = result.getLong("id_paciente");
+                String nome_paciente = result.getString("nome_paciente");
+                String unidade = result.getString("unidade");
+                Date data_atendimento = result.getDate("data_atendimento");
+
+                atendimentoList.add(new AtendimentoPorProfissional(id_profissional, nome_colaborador, id_paciente, nome_paciente, unidade, data_atendimento));
+            }
+
+            return atendimentoList;
+
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+
+    }
 }

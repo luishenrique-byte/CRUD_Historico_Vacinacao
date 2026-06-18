@@ -4,7 +4,8 @@ import Models.RegistroVacinacao;
 import Models.for_functions.ProximaDose;
 import Models.for_functions.QtdeDoses;
 import Models.for_functions.QtdeDosesXVacina;
-
+import Models.for_view.AtendimentoPorProfissional;
+import Models.for_view.HistoricoVacinacao;
 
 import java.sql.Date;
 import java.util.List;
@@ -20,4 +21,6 @@ public interface IRegistroRepository {
     public QtdeDoses callFuncQtdeDoses(long id);
     public List<QtdeDosesXVacina> callFuncQtdeDosesXVacina(long id);
     public List<ProximaDose> callFuncProxDose(long id);
+    public List<HistoricoVacinacao> callViewHistorico();
+    public List<AtendimentoPorProfissional> callViewAtendXProf();
 }
