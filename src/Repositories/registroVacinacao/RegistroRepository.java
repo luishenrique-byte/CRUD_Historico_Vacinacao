@@ -1,7 +1,11 @@
 package Repositories.registroVacinacao;
 
 import Models.RegistroVacinacao;
-
+import Models.for_functions.ProximaDose;
+import Models.for_functions.QtdeDoses;
+import Models.for_functions.QtdeDosesXVacina;
+import Models.for_view.AtendimentoPorProfissional;
+import Models.for_view.HistoricoVacinacao;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -229,4 +233,90 @@ public class RegistroRepository implements IRegistroRepository{
         }
     }
 
+    @Override
+    public QtdeDoses callFuncQtdeDoses(long id) {
+        String query = "SELECT * FROM func_qtde_doses(?)";
+
+        try {
+
+            PreparedStatement ps = _context.prepareStatement(query);
+
+            ps.setLong(1,id);
+
+            ResultSet result = ps.executeQuery();
+
+            if (result.next()){
+                String nome_paciente = result.getString("nome_paciente");
+                long qtde_doses = result.getLong("qtde_doses");
+
+                return new QtdeDoses(nome_paciente,qtde_doses);
+            }
+
+            return null;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public List<QtdeDosesXVacina> callFuncQtdeDosesXVacina(long id) {
+        String query = "SELECT * FROM func_qtde_doses_x_vacina(?)";
+
+        List<QtdeDosesXVacina> qtdeDosesList = new ArrayList<>();
+
+        try {
+
+            PreparedStatement ps = _context.prepareStatement(query);
+
+            ps.setLong(1,id);
+
+            ResultSet result = ps.executeQuery();
+
+            while (result.next()){
+                String vacina = result.getString("vacina");
+                long qtde_doses = result.getLong("qtde_doses");
+
+                qtdeDosesList.add(new QtdeDosesXVacina(vacina,qtde_doses));
+            }
+
+            return qtdeDosesList;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public List<ProximaDose> callFuncProxDose(long id) {
+        String query = "SELECT * FROM func_prox_dose(?);";
+
+        List<ProximaDose> proximaDoseList = new ArrayList<>();
+
+        try {
+
+            PreparedStatement ps = _context.prepareStatement(query);
+
+            ps.setLong(1,id);
+
+            ResultSet result = ps.executeQuery();
+
+            while (result.next()){
+                String nome_paciente = result.getString("nome_paciente");
+                String vacina = result.getString("vacina");
+                Date data_vacinacao_atual = result.getDate("data_vacinacao_atual");
+                Date data_prox_dose = result.getDate("data_prox_dose");
+
+                proximaDoseList.add(new ProximaDose(nome_paciente,vacina,data_vacinacao_atual,data_prox_dose));
+            }
+
+            return proximaDoseList;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
 }

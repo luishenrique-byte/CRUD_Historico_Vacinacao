@@ -1,6 +1,9 @@
 package Repositories.registroVacinacao;
 
 import Models.RegistroVacinacao;
+import Models.for_functions.ProximaDose;
+import Models.for_functions.QtdeDoses;
+import Models.for_functions.QtdeDosesXVacina;
 
 
 import java.sql.Date;
@@ -14,4 +17,7 @@ public interface IRegistroRepository {
     public List<RegistroVacinacao> getAllRegistro();
     public RegistroVacinacao getRegistroById(long id);
     public Integer updateRegistro(RegistroVacinacao rv);
+    public QtdeDoses callFuncQtdeDoses(long id);
+    public List<QtdeDosesXVacina> callFuncQtdeDosesXVacina(long id);
+    public List<ProximaDose> callFuncProxDose(long id);
 }
