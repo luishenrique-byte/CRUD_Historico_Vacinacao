@@ -27,8 +27,7 @@ public class Main {
         String driver = "org.postgresql.Driver";
         String user   = "postgres";
         String senha = "12345";
-        String url = "jdbc:postgresql://localhost:5432/dbhistoricovacina";
-//        String url = "jdbc:postgresql://localhost:5432/dbHistorico_Vacina";
+        String url = "jdbc:postgresql://localhost:5432/dbHistorico_Vacina";
 
         try {
 
