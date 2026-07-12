@@ -2,6 +2,7 @@ package com.luishenrique.cap.Historico_Vacinacao.service;
 
 import com.luishenrique.cap.Historico_Vacinacao.database.models.EstadoEntity;
 import com.luishenrique.cap.Historico_Vacinacao.database.repository.IEstadoRepository;
+import com.luishenrique.cap.Historico_Vacinacao.dto.estado.EstadoResponse;
 import com.luishenrique.cap.Historico_Vacinacao.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,15 +15,19 @@ public class EstadoService {
 
     private final IEstadoRepository repository;
 
-    public List<EstadoEntity> findAll(){
-        return repository.findAll();
+    public List<EstadoResponse> findAll(){
+        return repository.findAll()
+                .stream()
+                .map( m -> new EstadoResponse(m.getId(),
+                                                            m.getNome()))
+                .toList();
     }
 
-    public EstadoEntity findById(Integer id) throws NotFoundException {
+    public EstadoResponse findById(Integer id) throws NotFoundException {
 
         EstadoEntity estado = repository.findById(id)
                                 .orElseThrow(() -> new NotFoundException("Estado não encotrado"));
 
-        return estado;
+        return new EstadoResponse(estado.getId(), estado.getNome());
     }
 }

@@ -1,6 +1,6 @@
 package com.luishenrique.cap.Historico_Vacinacao.controller;
 
-import com.luishenrique.cap.Historico_Vacinacao.database.models.EstadoEntity;
+import com.luishenrique.cap.Historico_Vacinacao.dto.estado.EstadoResponse;
 import com.luishenrique.cap.Historico_Vacinacao.exception.NotFoundException;
 import com.luishenrique.cap.Historico_Vacinacao.service.EstadoService;
 import lombok.RequiredArgsConstructor;
@@ -18,13 +18,13 @@ public class EstadoController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<EstadoEntity> findAll(){
+    public List<EstadoResponse> findAll(){
         return service.findAll();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public EstadoEntity findById(@PathVariable Integer id) throws NotFoundException {
+    public EstadoResponse findById(@PathVariable Integer id) throws NotFoundException {
         return service.findById(id);
     }
 }
