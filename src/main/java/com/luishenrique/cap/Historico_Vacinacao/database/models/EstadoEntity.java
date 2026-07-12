@@ -19,4 +19,8 @@ public class EstadoEntity {
     @Column(nullable = false, length = 30, unique = true)
     private String nome;
 
+    @Builder.Default
+    @Column(nullable = false, columnDefinition = "boolean default true")
+    private Boolean ativo = true;
+
 }

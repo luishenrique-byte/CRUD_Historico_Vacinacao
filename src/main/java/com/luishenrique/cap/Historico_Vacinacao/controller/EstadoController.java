@@ -1,5 +1,6 @@
 package com.luishenrique.cap.Historico_Vacinacao.controller;
 
+import com.luishenrique.cap.Historico_Vacinacao.dto.estado.EstadoRequest;
 import com.luishenrique.cap.Historico_Vacinacao.dto.estado.EstadoResponse;
 import com.luishenrique.cap.Historico_Vacinacao.exception.NotFoundException;
 import com.luishenrique.cap.Historico_Vacinacao.service.EstadoService;
@@ -26,5 +27,11 @@ public class EstadoController {
     @ResponseStatus(HttpStatus.OK)
     public EstadoResponse findById(@PathVariable Integer id) {
         return service.findById(id);
+    }
+
+    @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
+    public void save(@RequestBody EstadoRequest request){
+        service.save(request);
     }
 }
