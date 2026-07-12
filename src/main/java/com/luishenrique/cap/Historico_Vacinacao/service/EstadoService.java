@@ -23,7 +23,7 @@ public class EstadoService {
                 .toList();
     }
 
-    public EstadoResponse findById(Integer id) throws NotFoundException {
+    public EstadoResponse findById(Integer id) {
 
         EstadoEntity estado = repository.findById(id)
                                 .orElseThrow(() -> new NotFoundException("Estado não encotrado"));

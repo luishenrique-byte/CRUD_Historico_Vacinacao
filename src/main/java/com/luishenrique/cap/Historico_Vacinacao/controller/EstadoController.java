@@ -24,7 +24,7 @@ public class EstadoController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public EstadoResponse findById(@PathVariable Integer id) throws NotFoundException {
+    public EstadoResponse findById(@PathVariable Integer id) {
         return service.findById(id);
     }
 }
