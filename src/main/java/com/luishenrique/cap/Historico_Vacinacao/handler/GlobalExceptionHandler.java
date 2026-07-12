@@ -1,5 +1,6 @@
 package com.luishenrique.cap.Historico_Vacinacao.handler;
 
+import com.luishenrique.cap.Historico_Vacinacao.exception.BadRequestException;
 import com.luishenrique.cap.Historico_Vacinacao.exception.ErroResponse;
 import com.luishenrique.cap.Historico_Vacinacao.exception.NotFoundException;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,15 @@ public class GlobalExceptionHandler {
         return new ErroResponse(
                 e.getMessage(),
                 HttpStatus.NOT_FOUND.value()
+        );
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErroResponse handlerBadRequestException(BadRequestException e){
+        return new ErroResponse(
+                e.getMessage(),
+                HttpStatus.BAD_REQUEST.value()
         );
     }
 
