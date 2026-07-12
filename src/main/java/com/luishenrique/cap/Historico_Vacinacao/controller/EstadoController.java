@@ -2,7 +2,6 @@ package com.luishenrique.cap.Historico_Vacinacao.controller;
 
 import com.luishenrique.cap.Historico_Vacinacao.dto.estado.EstadoRequest;
 import com.luishenrique.cap.Historico_Vacinacao.dto.estado.EstadoResponse;
-import com.luishenrique.cap.Historico_Vacinacao.exception.NotFoundException;
 import com.luishenrique.cap.Historico_Vacinacao.service.EstadoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -33,5 +32,17 @@ public class EstadoController {
     @ResponseStatus(HttpStatus.CREATED)
     public void save(@RequestBody EstadoRequest request){
         service.save(request);
+    }
+
+    @PatchMapping("/{id}/disable")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void disable(@PathVariable Integer id){
+        service.disable(id);
+    }
+
+    @PatchMapping("/{id}/enable")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void enable(@PathVariable Integer id){
+        service.enable(id);
     }
 }
