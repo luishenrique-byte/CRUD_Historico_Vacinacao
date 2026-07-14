@@ -23,4 +23,8 @@ public class MunicipioEntity {
     @JoinColumn(name = "id_estado", nullable = false)
     private EstadoEntity estado;
 
+    @Builder.Default
+    @Column(nullable = false, columnDefinition = "boolean default true")
+    private Boolean ativo = true;
+
 }
