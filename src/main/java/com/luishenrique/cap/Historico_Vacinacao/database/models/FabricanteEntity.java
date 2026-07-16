@@ -24,4 +24,7 @@ public class FabricanteEntity {
 
     @OneToMany(mappedBy = "fabricante")
     private Set<VacinaEntity> vacinas = new HashSet<>();
+
+    @Column(nullable = false, columnDefinition = "default boolean true")
+    private Boolean ativo = true;
 }
