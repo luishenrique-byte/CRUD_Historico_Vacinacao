@@ -25,4 +25,8 @@ public class VacinaEntity {
     @ManyToOne
     @JoinColumn(name = "id_fabricante", nullable = false)
     private FabricanteEntity fabricante;
+
+    @Builder.Default
+    @Column(nullable = false, columnDefinition = "boolean default true")
+    private Boolean ativo = true;
 }
