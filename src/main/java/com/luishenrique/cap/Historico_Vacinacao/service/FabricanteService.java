@@ -62,26 +62,38 @@ public class FabricanteService {
 
     public void enable(Integer id){
 
+        //Verifica se existe o Município
         FabricanteEntity fabricante = repository.findById(id)
                                     .orElseThrow(() -> new NotFoundException("Fabricante não encontrado"));
 
+        //Lógica para ativar
         if (!fabricante.getAtivo()){
             fabricante.setAtivo(true);
         } else {
             throw new BadRequestException("Fabricante já está Ativo.");
         }
+
+        //Persiste no banco
+        repository.save(fabricante);
+        
     }
 
     public void disable(Integer id){
 
+        //Verifica se existe o Município
         FabricanteEntity fabricante = repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Fabricante não encontrado"));
 
+
+        //Lógica para Inativar
         if (fabricante.getAtivo()){
             fabricante.setAtivo(false);
         } else {
             throw new BadRequestException("Fabricante já está Inativo.");
         }
+
+        //Persiste no banco
+        repository.save(fabricante);
 
     }
 }
