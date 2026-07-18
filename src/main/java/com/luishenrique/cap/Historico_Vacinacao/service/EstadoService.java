@@ -33,13 +33,15 @@ public class EstadoService {
         return toResponse(estado);
     }
 
-    public void save(EstadoRequest request){
-        repository.save(
+    public EstadoResponse save(EstadoRequest request){
+        EstadoEntity estado = repository.save(
                 EstadoEntity
                         .builder()
                         .nome(request.nome())
                         .build()
         );
+
+        return toResponse(estado);
     }
 
     public void disable(Integer id){

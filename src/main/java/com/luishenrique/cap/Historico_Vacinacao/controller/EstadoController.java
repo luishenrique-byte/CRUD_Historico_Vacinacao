@@ -30,8 +30,8 @@ public class EstadoController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public void save(@RequestBody EstadoRequest request){
-        service.save(request);
+    public EstadoResponse save(@RequestBody EstadoRequest request){
+        return service.save(request);
     }
 
     @PatchMapping("/{id}/disable")
