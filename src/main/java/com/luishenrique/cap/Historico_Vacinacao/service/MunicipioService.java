@@ -23,16 +23,7 @@ public class MunicipioService {
 
     public List<MunicipioResponse> findAll(){
         return repository.findAll().stream()
-                .map(m -> new MunicipioResponse(
-                        m.getId(),
-                        m.getNome(),
-                        m.getAtivo(),
-                        new EstadoResponse(
-                            m.getEstado().getId(),
-                            m.getEstado().getNome(),
-                            m.getEstado().getAtivo()
-                        )
-                    )
+                .map(m -> toResponse(m)
                 )
                 .toList();
     }
@@ -43,22 +34,13 @@ public class MunicipioService {
                 .orElseThrow(() -> new NotFoundException("Município não encontrado"));
 
         //Retorna o Objeto encontrado
-        return new MunicipioResponse(
-                municipio.getId(),
-                municipio.getNome(),
-                municipio.getAtivo(),
-                new EstadoResponse(
-                        municipio.getEstado().getId(),
-                        municipio.getEstado().getNome(),
-                        municipio.getEstado().getAtivo()
-                )
-        );
+        return toResponse(municipio);
     }
 
     public MunicipioResponse save(MunicipioRequest request){
         //Verifica se existe o estado informado
         EstadoEntity estado = estadoRepository.findById(request.idEstado())
-                .orElseThrow(() -> new NotFoundException("Estado não encontrado"));
+                .orElseThrow(() -> new BadRequestException("Nenhum Estado encontrado com esse código."));
 
         //Verifica se o Estado está ativo
         if (!estado.getAtivo()){
@@ -74,16 +56,7 @@ public class MunicipioService {
         );
 
         //Retorna o objeto criado
-        return new MunicipioResponse(
-                municipioCreated.getId(),
-                municipioCreated.getNome(),
-                municipioCreated.getAtivo(),
-                new EstadoResponse(
-                        municipioCreated.getEstado().getId(),
-                        municipioCreated.getEstado().getNome(),
-                        municipioCreated.getEstado().getAtivo()
-                )
-        );
+        return toResponse(municipioCreated);
     }
 
     public void enable(Long id){
@@ -119,6 +92,23 @@ public class MunicipioService {
 
         //Persiste no banco
         repository.save(municipio);
+
+    }
+
+    private MunicipioResponse toResponse(MunicipioEntity entity){
+
+        MunicipioResponse response = new MunicipioResponse(
+                entity.getId(),
+                entity.getNome(),
+                entity.getAtivo(),
+                new EstadoResponse(
+                        entity.getEstado().getId(),
+                        entity.getEstado().getNome(),
+                        entity.getEstado().getAtivo()
+                )
+        );
+
+        return response;
 
     }
 }
