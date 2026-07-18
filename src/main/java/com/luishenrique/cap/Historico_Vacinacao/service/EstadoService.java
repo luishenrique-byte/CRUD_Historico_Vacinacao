@@ -20,11 +20,7 @@ public class EstadoService {
     public List<EstadoResponse> findAll(){
         return repository.findAll()
                 .stream()
-                .map( m -> new EstadoResponse(
-                        m.getId(),
-                        m.getNome(),
-                        m.getAtivo()
-                        )
+                .map( m -> toResponse(m)
                 )
                 .toList();
     }
@@ -34,11 +30,7 @@ public class EstadoService {
         EstadoEntity estado = repository.findById(id)
                                 .orElseThrow(() -> new NotFoundException("Estado não encotrado"));
 
-        return new EstadoResponse(
-                estado.getId(),
-                estado.getNome(),
-                estado.getAtivo()
-        );
+        return toResponse(estado);
     }
 
     public void save(EstadoRequest request){
@@ -62,6 +54,7 @@ public class EstadoService {
 
         repository.save(estado);
     }
+
     public void enable(Integer id){
         EstadoEntity estado = repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Estado não encontrado"));
@@ -73,5 +66,15 @@ public class EstadoService {
         }
 
         repository.save(estado);
+    }
+
+    private EstadoResponse toResponse(EstadoEntity entity){
+        EstadoResponse response = new EstadoResponse(
+                entity.getId(),
+                entity.getNome(),
+                entity.getAtivo()
+        );
+
+        return response;
     }
 }
