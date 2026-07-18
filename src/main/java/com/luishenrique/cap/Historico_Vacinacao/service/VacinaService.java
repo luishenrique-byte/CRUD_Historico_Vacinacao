@@ -23,21 +23,10 @@ public class VacinaService {
     public List<VacinaResponse> findAll(){
 
         return repository.findAll().stream()
-                .map( m ->(
-                            new VacinaResponse(
-                                    m.getId(),
-                                    m.getNome(),
-                                    m.getIntervaloDoses(),
-                                    m.getAtivo(),
-                                    new FabricanteResponse(
-                                            m.getFabricante().getId(),
-                                            m.getFabricante().getNome(),
-                                            m.getFabricante().getAtivo()
-                                    )
-                            )
-                        )
+                .map( m -> toResponse(m)
                 )
                 .toList();
+
     }
 
     public VacinaResponse findById(Integer id){
@@ -45,17 +34,7 @@ public class VacinaService {
         VacinaEntity vac = repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Para esse código, não foi encontrado nenhuma Vacina"));
 
-        return new VacinaResponse(
-                vac.getId(),
-                vac.getNome(),
-                vac.getIntervaloDoses(),
-                vac.getAtivo(),
-                new FabricanteResponse(
-                        vac.getFabricante().getId(),
-                        vac.getFabricante().getNome(),
-                        vac.getFabricante().getAtivo()
-                )
-        );
+        return toResponse(vac);
     }
 
     public VacinaResponse save(VacinaRequest request){
@@ -75,18 +54,7 @@ public class VacinaService {
                         .fabricante(fabricante)
                 .build());
 
-        return new VacinaResponse(
-                vac.getId(),
-                vac.getNome(),
-                vac.getIntervaloDoses(),
-                vac.getAtivo(),
-                new FabricanteResponse(
-                        vac.getFabricante().getId(),
-                        vac.getFabricante().getNome(),
-                        vac.getFabricante().getAtivo()
-                )
-        );
-
+        return toResponse(vac);
     }
 
     public void enable(Integer id){
@@ -106,6 +74,7 @@ public class VacinaService {
         repository.save(vacina);
 
     }
+
     public void disable(Integer id){
 
         //Verifica se existe o Vacina
@@ -122,5 +91,21 @@ public class VacinaService {
         //Persiste no banco
         repository.save(vacina);
 
+    }
+
+    private VacinaResponse toResponse(VacinaEntity entity){
+        VacinaResponse response = new VacinaResponse(
+                entity.getId(),
+                entity.getNome(),
+                entity.getIntervaloDoses(),
+                entity.getAtivo(),
+                new FabricanteResponse(
+                        entity.getFabricante().getId(),
+                        entity.getFabricante().getNome(),
+                        entity.getFabricante().getAtivo()
+                )
+        );
+
+        return response;
     }
 }
