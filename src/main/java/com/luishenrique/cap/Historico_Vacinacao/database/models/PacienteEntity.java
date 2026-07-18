@@ -38,6 +38,4 @@ public class PacienteEntity {
     @JoinColumn(name = "id_municipio", nullable = false)
     private MunicipioEntity municipio;
 
-    @Column(name = "ativo", columnDefinition = "boolean default true")
-    private Boolean ativo = true;
 }
