@@ -22,11 +22,7 @@ public class FabricanteService {
         return repository.findAll()
                 .stream()
                 .map(
-                        m -> new FabricanteResponse(
-                                m.getId(),
-                                m.getNome(),
-                                m.getAtivo()
-                        )
+                        m -> toResponse(m)
                 )
                 .toList();
 
@@ -37,11 +33,7 @@ public class FabricanteService {
         FabricanteEntity fabricante = repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Fabricante não encontrado."));
 
-        return new FabricanteResponse(
-                fabricante.getId(),
-                fabricante.getNome(),
-                fabricante.getAtivo()
-        );
+        return toResponse(fabricante);
 
     }
 
@@ -53,11 +45,7 @@ public class FabricanteService {
                         .build()
         );
 
-        return new FabricanteResponse(
-                fabricanteCreated.getId(),
-                fabricanteCreated.getNome(),
-                fabricanteCreated.getAtivo()
-        );
+        return toResponse(fabricanteCreated);
     }
 
     public void enable(Integer id){
@@ -95,5 +83,15 @@ public class FabricanteService {
         //Persiste no banco
         repository.save(fabricante);
 
+    }
+
+    private FabricanteResponse toResponse(FabricanteEntity entity){
+        FabricanteResponse response = new FabricanteResponse(
+                entity.getId(),
+                entity.getNome(),
+                entity.getAtivo()
+        );
+
+        return response;
     }
 }
