@@ -1,7 +1,7 @@
 package com.luishenrique.cap.Historico_Vacinacao.controller;
 
-import com.luishenrique.cap.Historico_Vacinacao.dto.unidadeAtendimento.UnidadeRequest;
-import com.luishenrique.cap.Historico_Vacinacao.dto.unidadeAtendimento.UnidadeResponse;
+import com.luishenrique.cap.Historico_Vacinacao.dto.unidade.UnidadeRequest;
+import com.luishenrique.cap.Historico_Vacinacao.dto.unidade.UnidadeResponse;
 import com.luishenrique.cap.Historico_Vacinacao.service.UnidadeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

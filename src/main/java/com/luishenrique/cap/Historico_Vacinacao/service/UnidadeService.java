@@ -6,8 +6,8 @@ import com.luishenrique.cap.Historico_Vacinacao.database.repository.IMunicipioRe
 import com.luishenrique.cap.Historico_Vacinacao.database.repository.IUnidadeRepository;
 import com.luishenrique.cap.Historico_Vacinacao.dto.estado.EstadoResponse;
 import com.luishenrique.cap.Historico_Vacinacao.dto.municipio.MunicipioResponse;
-import com.luishenrique.cap.Historico_Vacinacao.dto.unidadeAtendimento.UnidadeRequest;
-import com.luishenrique.cap.Historico_Vacinacao.dto.unidadeAtendimento.UnidadeResponse;
+import com.luishenrique.cap.Historico_Vacinacao.dto.unidade.UnidadeRequest;
+import com.luishenrique.cap.Historico_Vacinacao.dto.unidade.UnidadeResponse;
 import com.luishenrique.cap.Historico_Vacinacao.dto.utils.EnderecoResponse;
 import com.luishenrique.cap.Historico_Vacinacao.exception.BadRequestException;
 import com.luishenrique.cap.Historico_Vacinacao.exception.NotFoundException;

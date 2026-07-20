@@ -1,4 +1,4 @@
-package com.luishenrique.cap.Historico_Vacinacao.dto.unidadeAtendimento;
+package com.luishenrique.cap.Historico_Vacinacao.dto.unidade;
 
 import com.luishenrique.cap.Historico_Vacinacao.dto.utils.EnderecoRequest;
 
