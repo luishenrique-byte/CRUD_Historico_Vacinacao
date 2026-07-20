@@ -29,4 +29,8 @@ public class UnidadeAtendimentoEntity {
     @ManyToOne
     @JoinColumn(name = "id_municipio", nullable = false)
     private MunicipioEntity municipio;
+
+    @Builder.Default
+    @Column(nullable = false, columnDefinition = "boolean default true")
+    private Boolean ativo = true;
 }
