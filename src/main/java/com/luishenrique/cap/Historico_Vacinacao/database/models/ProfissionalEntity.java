@@ -32,4 +32,8 @@ public class ProfissionalEntity {
     @ManyToOne
     @JoinColumn(name = "id_unidade")
     private UnidadeAtendimentoEntity unidadeAtendimento;
+
+    @Builder.Default
+    @Column(nullable = false, columnDefinition = "boolean default true")
+    private Boolean ativo = true;
 }
