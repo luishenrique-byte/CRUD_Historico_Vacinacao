@@ -31,7 +31,7 @@ public class ProfissionalEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_unidade")
-    private UnidadeAtendimentoEntity unidadeAtendimento;
+    private UnidadeAtendimentoEntity unidade;
 
     @Builder.Default
     @Column(nullable = false, columnDefinition = "boolean default true")

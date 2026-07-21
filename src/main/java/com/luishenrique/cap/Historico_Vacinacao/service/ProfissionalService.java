@@ -51,7 +51,7 @@ public class ProfissionalService {
                     .documento(request.documento())
                     .cargo(request.cargo())
                     .tipoProf(request.tipoProf())
-                    .unidadeAtendimento(unidade)
+                    .unidade(unidade)
                 .build());
 
         return toResponse(profissional);
@@ -94,21 +94,21 @@ public class ProfissionalService {
                 entity.getTipoProf(),
                 entity.getAtivo(),
                 new UnidadeResponse(
-                        entity.getUnidadeAtendimento().getId(),
-                        entity.getUnidadeAtendimento().getNome(),
-                        entity.getUnidadeAtendimento().getAtivo(),
+                        entity.getUnidade().getId(),
+                        entity.getUnidade().getNome(),
+                        entity.getUnidade().getAtivo(),
                         new EnderecoResponse(
-                                entity.getUnidadeAtendimento().getRua(),
-                                entity.getUnidadeAtendimento().getNumero(),
-                                entity.getUnidadeAtendimento().getCep(),
+                                entity.getUnidade().getRua(),
+                                entity.getUnidade().getNumero(),
+                                entity.getUnidade().getCep(),
                                 new MunicipioResponse(
-                                        entity.getUnidadeAtendimento().getMunicipio().getId(),
-                                        entity.getUnidadeAtendimento().getMunicipio().getNome(),
-                                        entity.getUnidadeAtendimento().getMunicipio().getAtivo(),
+                                        entity.getUnidade().getMunicipio().getId(),
+                                        entity.getUnidade().getMunicipio().getNome(),
+                                        entity.getUnidade().getMunicipio().getAtivo(),
                                         new EstadoResponse(
-                                                entity.getUnidadeAtendimento().getMunicipio().getEstado().getId(),
-                                                entity.getUnidadeAtendimento().getMunicipio().getEstado().getNome(),
-                                                entity.getUnidadeAtendimento().getMunicipio().getEstado().getAtivo()
+                                                entity.getUnidade().getMunicipio().getEstado().getId(),
+                                                entity.getUnidade().getMunicipio().getEstado().getNome(),
+                                                entity.getUnidade().getMunicipio().getEstado().getAtivo()
                                         )
                                 )
                         )
