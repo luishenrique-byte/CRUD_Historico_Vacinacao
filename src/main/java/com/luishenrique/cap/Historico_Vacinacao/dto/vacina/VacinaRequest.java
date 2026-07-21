@@ -1,7 +1,10 @@
 package com.luishenrique.cap.Historico_Vacinacao.dto.vacina;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public record VacinaRequest(
-        String nome,
+        @NotBlank String nome,
         Integer intervaloDoses,
-        Integer idFabricante
+        @NotNull Integer idFabricante
 ) {}
