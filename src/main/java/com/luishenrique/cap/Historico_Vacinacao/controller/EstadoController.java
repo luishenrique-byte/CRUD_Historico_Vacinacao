@@ -3,6 +3,7 @@ package com.luishenrique.cap.Historico_Vacinacao.controller;
 import com.luishenrique.cap.Historico_Vacinacao.dto.estado.EstadoRequest;
 import com.luishenrique.cap.Historico_Vacinacao.dto.estado.EstadoResponse;
 import com.luishenrique.cap.Historico_Vacinacao.service.EstadoService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,7 @@ public class EstadoController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public EstadoResponse save(@RequestBody EstadoRequest request){
+    public EstadoResponse save(@RequestBody @Valid EstadoRequest request){
         return service.save(request);
     }
 
