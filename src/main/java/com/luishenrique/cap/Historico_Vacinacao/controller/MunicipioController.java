@@ -4,6 +4,7 @@ import com.luishenrique.cap.Historico_Vacinacao.database.repository.IMunicipioRe
 import com.luishenrique.cap.Historico_Vacinacao.dto.municipio.MunicipioRequest;
 import com.luishenrique.cap.Historico_Vacinacao.dto.municipio.MunicipioResponse;
 import com.luishenrique.cap.Historico_Vacinacao.service.MunicipioService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +32,7 @@ public class MunicipioController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public MunicipioResponse save(@RequestBody MunicipioRequest request){
+    public MunicipioResponse save(@RequestBody @Valid MunicipioRequest request){
         return service.save(request);
     }
 
