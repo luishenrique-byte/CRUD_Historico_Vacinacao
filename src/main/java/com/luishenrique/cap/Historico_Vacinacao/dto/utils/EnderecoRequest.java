@@ -1,8 +1,11 @@
 package com.luishenrique.cap.Historico_Vacinacao.dto.utils;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public record EnderecoRequest(
-        String rua,
-        Integer numero,
-        String cep,
-        Long idMunicipio
+        @NotBlank String rua,
+        @NotNull Integer numero,
+        @NotBlank String cep,
+        @NotNull Long idMunicipio
 ) {}
