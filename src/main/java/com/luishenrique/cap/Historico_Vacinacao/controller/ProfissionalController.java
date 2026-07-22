@@ -3,6 +3,7 @@ package com.luishenrique.cap.Historico_Vacinacao.controller;
 import com.luishenrique.cap.Historico_Vacinacao.dto.profissional.ProfissionalRequest;
 import com.luishenrique.cap.Historico_Vacinacao.dto.profissional.ProfissionalResponse;
 import com.luishenrique.cap.Historico_Vacinacao.service.ProfissionalService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,7 @@ public class ProfissionalController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ProfissionalResponse save(@RequestBody ProfissionalRequest request){
+    public ProfissionalResponse save(@RequestBody @Valid ProfissionalRequest request){
         return service.save(request);
     }
 
