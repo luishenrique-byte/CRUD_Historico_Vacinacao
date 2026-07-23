@@ -3,6 +3,7 @@ package com.luishenrique.cap.Historico_Vacinacao.controller;
 import com.luishenrique.cap.Historico_Vacinacao.dto.registro.RegistroRequest;
 import com.luishenrique.cap.Historico_Vacinacao.dto.registro.RegistroResponse;
 import com.luishenrique.cap.Historico_Vacinacao.service.RegistroService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,7 @@ public class RegistroController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public RegistroResponse save(@RequestBody RegistroRequest request){
+    public RegistroResponse save(@RequestBody @Valid RegistroRequest request){
         return service.save(request);
     }
 }
