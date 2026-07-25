@@ -67,11 +67,9 @@ public class CpfUtils {
      */
     private static int sum(String cpf){
 
-        if (cpf.length() == 0) return 0;
+        if (cpf.isBlank()) return 0;
 
         int mulplicacao = Integer.parseInt((cpf.charAt(0) +"")) * (cpf.length()+1);
-
-        System.out.println(mulplicacao);
 
         return mulplicacao + sum(cpf.substring(1));
 
