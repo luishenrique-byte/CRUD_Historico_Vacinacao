@@ -11,6 +11,7 @@ import com.luishenrique.cap.Historico_Vacinacao.dto.paciente.PacienteResponse;
 import com.luishenrique.cap.Historico_Vacinacao.dto.utils.EnderecoResponse;
 import com.luishenrique.cap.Historico_Vacinacao.exception.BadRequestException;
 import com.luishenrique.cap.Historico_Vacinacao.exception.NotFoundException;
+import com.luishenrique.cap.Historico_Vacinacao.utils.CpfUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,9 @@ public class PacienteService {
 
     private final IPacienteRepository repository;
     private final IMunicipioRepository municipioRepository;
+
+    // Remove qualquer caractere que não seja dígito (pontos, traços, espaços)
+    private static final String REGEX_REMOVE_NAO_NUMEROS = "[^0-9]";
 
     public List<PacienteResponse> findAll(){
         return repository.findAll().stream()
@@ -37,6 +41,9 @@ public class PacienteService {
     }
 
     public List<PacienteResponse> findByCpf(String cpf){
+
+        if (!CpfUtils.isValid(cpf)) throw new BadRequestException("O CPF: " + cpf + "Não é valido, verifique se o formato ou sequência está correta informado. Formatos aceitos: (000.000.000-00 ou 11111111111)");
+
         List<PacienteEntity> pacienteEntityList = repository.findByCpf(cpf);
 
         if (pacienteEntityList.isEmpty()){
@@ -50,6 +57,10 @@ public class PacienteService {
 
     public PacienteResponse save(PacienteRequest request){
 
+        if (!CpfUtils.isValid(request.cpf())){
+            throw new BadRequestException("O CPF: " + request.cpf() + "Não é valido, verifique se o formato ou sequência está correta informado. Formatos aceitos: (000.000.000-00 ou 11111111111)");
+        }
+
         MunicipioEntity municipio = municipioRepository.findById(request.endereco().idMunicipio())
                 .orElseThrow(() -> new BadRequestException("Municipio não existente"));
 
@@ -57,7 +68,7 @@ public class PacienteService {
                 PacienteEntity.builder()
                         .nome(request.nome())
                         .dataNascimento(request.dataNascimento())
-                        .cpf(request.cpf())
+                        .cpf(request.cpf().replaceAll(REGEX_REMOVE_NAO_NUMEROS,""))
                         .rua(request.endereco().rua())
                         .numero(request.endereco().numero())
                         .cep(request.endereco().cep())
