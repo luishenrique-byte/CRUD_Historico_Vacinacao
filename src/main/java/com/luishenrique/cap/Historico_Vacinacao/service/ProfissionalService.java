@@ -71,6 +71,19 @@ public class ProfissionalService {
         UnidadeAtendimentoEntity unidade = unidadeRepository.findById(request.idUnidade())
                 .orElseThrow(() -> new NotFoundException("Não nenhuma Unidade de Atendimento com esse Código. Verifique o ID informado!"));
 
+        switch (request.tipoProf()){
+            case PJ -> {
+                if (!CnpjUtils.isValid(request.documento())){
+                    throw new BadRequestException("O CNPJ: " + request.documento() + " Não é valido, verifique se o formato ou sequência está correta informado. Formatos aceitos: (12.345.678/0001-90) ou (12345678000190)");
+                }
+            }
+            case CLT -> {
+                if (!CpfUtils.isValid(request.documento())){
+                    throw new BadRequestException("O CPF: " + request.documento() + " Não é valido, verifique se o formato ou sequência está correta informado. Formatos aceitos: (000.000.000-00 ou 11111111111)");
+                }
+            }
+        }
+
         if (!unidade.getAtivo()){
             throw new BadRequestException("A Unidade de Atendimento informada está INATIVA. Por favor, Ative a Unidade de atendimento ou informe outra Unidade de Atendimento que esteja ATIVA.");
         }
@@ -78,7 +91,7 @@ public class ProfissionalService {
         ProfissionalEntity profissional = repository.save(
                 ProfissionalEntity.builder()
                     .nome(request.nome())
-                    .documento(request.documento())
+                    .documento(request.documento().replaceAll(REGEX_REMOVE_NAO_NUMEROS,""))
                     .cargo(request.cargo())
                     .tipoProf(request.tipoProf())
                     .unidade(unidade)
