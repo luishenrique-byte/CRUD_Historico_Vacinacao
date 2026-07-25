@@ -14,7 +14,7 @@ public class CpfUtils {
 
     // Valida o formato antes da matemática para evitar processamento desnecessário
     public static boolean isValid(String cpf){
-        return validMath(cpf) && validString(cpf);
+        return validString(cpf) && validMath(cpf);
     }
 
     // Verifica se o CPF tem o formato correto (com ou sem máscara)
