@@ -67,6 +67,15 @@ public class ProfissionalService {
                 .map(m -> toResponse(m))
                 .toList();
     }
+
+    public List<ProfissionalResponse> findByAtivo(){
+
+        return repository.findAll().stream()
+                .filter(m -> m.getAtivo())
+                .map(m -> toResponse(m))
+                .toList();
+
+    }
     public ProfissionalResponse save(ProfissionalRequest request){
         UnidadeAtendimentoEntity unidade = unidadeRepository.findById(request.idUnidade())
                 .orElseThrow(() -> new NotFoundException("Não nenhuma Unidade de Atendimento com esse Código. Verifique o ID informado!"));
