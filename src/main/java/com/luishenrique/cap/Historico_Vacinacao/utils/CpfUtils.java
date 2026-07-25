@@ -24,11 +24,11 @@ public class CpfUtils {
 
     private static boolean validMath(String cpf){
 
-        // Rejeita CPFs com todos os dígitos iguais
-        if (cpf.matches(REGEX_TODOS_IGUAIS)) return false;
-
         // Remove máscara para trabalhar só com os 11 dígitos
         cpf = cpf.replaceAll(REGEX_REMOVE_NAO_NUMEROS,"");
+
+        // Rejeita CPFs com todos os dígitos iguais
+        if (cpf.matches(REGEX_TODOS_IGUAIS)) return false;
 
         // Extrai os dois dígitos verificadores (posições 9 e 10)
         int penultimo = Integer.parseInt((cpf.charAt(9) + ""));
