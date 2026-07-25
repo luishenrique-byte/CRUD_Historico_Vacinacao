@@ -29,6 +29,24 @@ public class ProfissionalController {
         return service.findById(id);
     }
 
+    @GetMapping("/buscarPorCpf")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ProfissionalResponse> findByCpf(@RequestParam String cpf){
+        return service.findByCpf(cpf);
+    }
+
+    @GetMapping("/buscarPorCnpj")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ProfissionalResponse> findByCnpj(@RequestParam String cnpj){
+        return service.findByCnpj(cnpj);
+    }
+
+    @GetMapping("/filtrarAtivos")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ProfissionalResponse> findByAtivo(){
+        return service.findByAtivo();
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ProfissionalResponse save(@RequestBody @Valid ProfissionalRequest request){
