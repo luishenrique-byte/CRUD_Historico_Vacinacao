@@ -12,6 +12,8 @@ import com.luishenrique.cap.Historico_Vacinacao.dto.unidade.UnidadeResponse;
 import com.luishenrique.cap.Historico_Vacinacao.dto.utils.EnderecoResponse;
 import com.luishenrique.cap.Historico_Vacinacao.exception.BadRequestException;
 import com.luishenrique.cap.Historico_Vacinacao.exception.NotFoundException;
+import com.luishenrique.cap.Historico_Vacinacao.utils.CnpjUtils;
+import com.luishenrique.cap.Historico_Vacinacao.utils.CpfUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,9 @@ public class ProfissionalService {
 
     private final IProfissionalRepository repository;
     private final IUnidadeRepository unidadeRepository;
+
+    // Remove qualquer caractere que não seja dígito (pontos, traços, espaços)
+    private static final String REGEX_REMOVE_NAO_NUMEROS = "[^0-9]";
 
     public List<ProfissionalResponse> findAll(){
         return repository.findAll().stream()
@@ -37,6 +42,31 @@ public class ProfissionalService {
         return toResponse(entity);
     }
 
+    public List<ProfissionalResponse> findByCpf(String cpf){
+
+        if (!CpfUtils.isValid(cpf)){
+            throw new BadRequestException("O CPF: " + cpf + " Não é valido, verifique se o formato ou sequência está correta informado. Formatos aceitos: (000.000.000-00 ou 11111111111)");
+        }
+
+        cpf = cpf.replaceAll(REGEX_REMOVE_NAO_NUMEROS,"");
+
+        return repository.findByDocumento(cpf).stream()
+                .map( m -> toResponse(m))
+                .toList();
+    }
+
+    public List<ProfissionalResponse> findByCnpj(String cnpj){
+
+        if (!CnpjUtils.isValid(cnpj)){
+            throw new BadRequestException("O CNPJ: " + cnpj + " Não é valido, verifique se o formato ou sequência está correta informado. Formatos aceitos: (12.345.678/0001-90) ou (12345678000190)");
+        }
+
+        cnpj = cnpj.replaceAll(REGEX_REMOVE_NAO_NUMEROS, "");
+
+        return repository.findByDocumento(cnpj).stream()
+                .map(m -> toResponse(m))
+                .toList();
+    }
     public ProfissionalResponse save(ProfissionalRequest request){
         UnidadeAtendimentoEntity unidade = unidadeRepository.findById(request.idUnidade())
                 .orElseThrow(() -> new NotFoundException("Não nenhuma Unidade de Atendimento com esse Código. Verifique o ID informado!"));
