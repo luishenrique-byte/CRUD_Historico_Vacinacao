@@ -4,6 +4,14 @@ target/
 !**/src/test/**/target/
 .kotlin
 
+# Backend
+backend/target/
+backend/.idea/
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
 ### IntelliJ IDEA ###
 .idea/
 #.idea/modules.xml
