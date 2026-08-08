@@ -23,6 +23,12 @@ public class RegistroController {
         return service.findAll();
     }
 
+    @GetMapping("/paciente/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<RegistroResponse> findAllByPaciente(@PathVariable Long id){
+        return service.findAllByPaciente(id);
+    }
+
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public RegistroResponse findById(@PathVariable Long id){

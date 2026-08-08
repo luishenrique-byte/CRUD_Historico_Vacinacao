@@ -35,6 +35,15 @@ public class RegistroService {
                 .toList();
     }
 
+    public List<RegistroResponse> findAllByPaciente(Long idPaciente){
+        PacienteEntity pac = pacienteRepository.findById(idPaciente)
+                .orElseThrow(() -> new NotFoundException("Não há Paciente com esse Código. Verifique o Código Informado."));
+
+        return repository.findAllByPaciente(pac).stream()
+                .map(m -> toResponse(m))
+                .toList();
+    }
+
     public RegistroResponse findById(Long id){
         return toResponse(repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Não há Registro de Vacinação com esse Código. Verifique o Código Informado.")));
