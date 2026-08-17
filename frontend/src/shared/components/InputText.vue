@@ -20,7 +20,7 @@ defineProps({
 
 label {
   /* margin-bottom: 10px; */
-  color: #5d8dd4;
+  color: black;
   padding: 5px;
   position: absolute;
   border-radius: 20px;
@@ -42,6 +42,7 @@ input:focus ~ label,
 input:valid ~ label {
   top: 0;
   background-color: #fff;
+  color: #5d8dd4;
   font-size: 0.7rem;
 }
 </style>
