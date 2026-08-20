@@ -1,21 +1,18 @@
-<script setup>
-import AuthPage from './features/auth/AuthPage.vue'
-</script>
+<script setup></script>
 
 <template>
   <main>
-    <AuthPage></AuthPage>
-    
+    <RouterView></RouterView>
   </main>
 </template>
 
 <style scoped>
-main{
+main {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   width: 100vw;
-  background: linear-gradient(122deg, #FFF 0%, #5D8DD4 64.95%);
+  background: linear-gradient(122deg, #fff 0%, #5d8dd4 64.95%);
 }
 </style>
