@@ -5,6 +5,7 @@ import AuthPage from '../features/auth/AuthPage.vue'
 const routes = [
   { path: '/', component: HomePage },
   { path: '/auth/:tipo', component: AuthPage },
+  { path: '/:pathMatch(.*)*', redirect: '/' },
 ]
 
 const router = createRouter({
