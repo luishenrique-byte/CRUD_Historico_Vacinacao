@@ -1,32 +1,42 @@
 <!-- SCRIPT -->
 <script setup>
+import { useRoute } from 'vue-router'
 import InputText from '@/shared/components/InputText.vue'
+import imgEnfermeira from '../../assets/enfermeira_256x256_pc.png'
+import imgPaciente from '../../assets/paciente_256x256_pc.png'
 
-//é necessário receber do login se é paciente ou profissional
-//para os atributos
-//src:"" das img
-//interpolação do label
-//interpolação do button
+const route = useRoute()
+
+// route.params.tipo
+const userType = route.params.tipo
+
+if (userType !== 'paciente' && userType !== 'profissional') {
+  // Redirecionar para a página inicial ou exibir uma mensagem de erro
+  console.error('Tipo de usuário inválido:', userType)
+  // Aqui você pode usar o router para redirecionar, se necessário
+}
+
+const userImg = userType === 'paciente' ? imgPaciente : imgEnfermeira
+const userLabel = userType === 'paciente' ? 'Paciente' : 'Profissional'
+const userButtonLabel = userType === 'paciente' ? 'Cartão de Vacina' : 'WorkFlow'
 </script>
 <!-- HTML -->
 <template>
   <span class="card">
-    <img class="img" draggable="false" src="../../assets/paciente_256x256_pc.png" />
+    <img class="img" draggable="false" :src="userImg" />
 
-    <span class="label-dinamica"
-      >Informe o CPF do
+    <span class="label-dinamica">
+      Informe o CPF do
       <p>
-        Paciente
-        <!--é necessário fazer e interpolação aqui-->
+        {{ userLabel }}
       </p></span
     >
 
     <InputText label="CPF"></InputText>
 
-    <button class="btn-acess">Acessar Cartão de Vacina<!--Ou WorkFlow--></button>
+    <button class="btn-acess">Acessar {{ userButtonLabel }}<!--Ou WorkFlow--></button>
   </span>
 </template>
-<!-- Informe o  CPF do PacienteOu profissional -->
 
 <!-- STYLE -->
 <style scoped>
