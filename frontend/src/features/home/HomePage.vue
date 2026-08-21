@@ -1,15 +1,22 @@
-<script setup></script>
+<script setup>
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
+function goToAuthPage(tipo) {
+  router.push(`/auth/${tipo}`)
+}
+</script>
 
 <template>
   <!-- Necessário implementar as rotas-->
   <div class="conteiner">
-    <span class="button-card">
+    <span class="button-card" @click="goToAuthPage('profissional')">
       <img class="img" draggable="false" src="../../assets/enfermeira_256x256_pc.png" />
 
       <span class="user-type">Técnica de Enf./ Enfermeira</span>
     </span>
 
-    <span class="button-card">
+    <span class="button-card" @click="goToAuthPage('paciente')">
       <img class="img" draggable="false" src="../../assets/paciente_256x256_pc.png" />
 
       <span class="user-type">Paciente</span>
