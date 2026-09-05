@@ -42,7 +42,9 @@ public class PacienteService {
 
     public List<PacienteResponse> findByCpf(String cpf){
 
-        if (!CpfUtils.isValid(cpf)) throw new BadRequestException("O CPF: " + cpf + "Não é valido, verifique se o formato ou sequência está correta informado. Formatos aceitos: (000.000.000-00 ou 11111111111)");
+        if (!CpfUtils.isValid(cpf)) throw new BadRequestException("O CPF: " + cpf + " Não é valido, verifique se o formato ou sequência está correta informado. Formatos aceitos: (000.000.000-00 ou 11111111111)");
+
+        cpf = cpf.replaceAll(REGEX_REMOVE_NAO_NUMEROS,"");
 
         List<PacienteEntity> pacienteEntityList = repository.findByCpf(cpf);
 
