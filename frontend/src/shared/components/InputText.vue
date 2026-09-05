@@ -4,12 +4,20 @@ defineProps({
     type: String,
     required: true,
   },
+  modelValue: String,
 })
+
+const emit = defineEmits(['update:modelValue'])
 </script>
 
 <template>
   <div class="group-input">
-    <input required id="input" type="text" />
+    <input
+      required
+      id="input"
+      type="text"
+      @input="emit('update:modelValue', $event.target.value)"
+    />
     <label for="input">{{ label }}</label>
   </div>
 </template>
