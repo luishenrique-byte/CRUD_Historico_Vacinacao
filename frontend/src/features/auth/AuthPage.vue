@@ -1,11 +1,15 @@
 <!-- SCRIPT -->
 <script setup>
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+import { ref } from 'vue'
 import InputText from '@/shared/components/InputText.vue'
 import imgEnfermeira from '../../assets/enfermeira_256x256_pc.png'
 import imgPaciente from '../../assets/paciente_256x256_pc.png'
+import { findByCpf } from '../../shared/services/pacienteServices'
 
 const route = useRoute()
+
+const router = useRouter()
 
 // route.params.tipo
 const userType = route.params.tipo
@@ -13,12 +17,31 @@ const userType = route.params.tipo
 if (userType !== 'paciente' && userType !== 'profissional') {
   // Redirecionar para a página inicial ou exibir uma mensagem de erro
   console.error('Tipo de usuário inválido:', userType)
-  // Aqui você pode usar o router para redirecionar, se necessário
+
+  router.push('/')
 }
 
 const userImg = userType === 'paciente' ? imgPaciente : imgEnfermeira
 const userLabel = userType === 'paciente' ? 'Paciente' : 'Profissional'
 const userButtonLabel = userType === 'paciente' ? 'Cartão de Vacina' : 'WorkFlow'
+
+const cpf = ref('')
+
+async function login() {
+  if (userType === 'paciente') {
+    try {
+      const paciente = (await findByCpf(cpf.value)).data
+      localStorage.setItem('tipo', 'paciente')
+      localStorage.setItem('paciente-CPF', cpf.value)
+      router.push('/paciente/vaccine')
+    } catch (error) {
+      //melhorar como mostra o erro, ToDo: ou pop-up ou msg em baixo do botão
+      console.log('ERROR: ' + error.response.data.mensagem)
+    }
+  } else if (userType === 'profissional') {
+    // TODO: implementar login do profissional
+  }
+}
 </script>
 <!-- HTML -->
 <template>
@@ -29,12 +52,12 @@ const userButtonLabel = userType === 'paciente' ? 'Cartão de Vacina' : 'WorkFlo
       Informe o CPF do
       <p>
         {{ userLabel }}
-      </p></span
-    >
+      </p>
+    </span>
 
-    <InputText label="CPF"></InputText>
+    <InputText label="CPF" v-model="cpf"></InputText>
 
-    <button class="btn-acess">Acessar {{ userButtonLabel }}<!--Ou WorkFlow--></button>
+    <button class="btn-acess" @click="login">Acessar {{ userButtonLabel }}</button>
   </span>
 </template>
 
