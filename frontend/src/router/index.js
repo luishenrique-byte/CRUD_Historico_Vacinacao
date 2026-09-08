@@ -19,6 +19,9 @@ const router = createRouter({
   routes,
 })
 
+//Como precisamos impedir que pacientes acessem rotas do workflow
+// de funcionarios, esse Router Guard Simples captura no LocalStorage
+// o tipo do usuário(Informado no AuthPage) que está vagando
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
     if (localStorage.getItem('tipo') !== to.meta.tipo) {
