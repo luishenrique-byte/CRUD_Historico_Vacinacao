@@ -1,27 +1,27 @@
 <!-- SCRIPT -->
 <script setup>
+import { useError } from '../../shared/composables/useError'
 import { useRoute, useRouter } from 'vue-router'
 import { ref } from 'vue'
 import InputText from '@/shared/components/InputText.vue'
 import imgEnfermeira from '../../assets/enfermeira_256x256_pc.png'
 import imgPaciente from '../../assets/paciente_256x256_pc.png'
 import { findByCpf } from '../../shared/services/pacienteServices'
-import ErrorMenssage from '@/shared/components/ErrorMenssage.vue'
 
 const route = useRoute()
 
 const router = useRouter()
 
-const meuErro = ref('');
+const { showError } = useError()
 
 // route.params.tipo
-const userType = route.params.tipo
+const userType = route.params.tipo //Recebe o tipo atráves da rota
 
 if (userType !== 'paciente' && userType !== 'profissional') {
   // Exibir uma mensagem de erro
   console.error('Tipo de usuário inválido:', userType)
 
-  // Redirecionar para a página inicial 
+  // Redirecionar para a página inicial
   router.push('/')
 }
 
@@ -34,14 +34,12 @@ const cpf = ref('')
 async function login() {
   if (userType === 'paciente') {
     try {
-      const paciente = (await findByCpf(cpf.value)).data
+      ;(await findByCpf(cpf.value)).data
       localStorage.setItem('tipo', 'paciente')
       localStorage.setItem('paciente-CPF', cpf.value)
       router.push('/paciente/vaccine')
-    } catch (error) {
-      //melhorar como mostra o erro, ToDo: ou pop-up ou msg em baixo do botão
-      console.log('ERROR: ' + error.response.data.mensagem)
-      meuErro.value = error.response.data.mensagem
+    } catch (e) {
+      showError(e.response.data.mensagem)
     }
   } else if (userType === 'profissional') {
     // TODO: implementar login do profissional
@@ -64,8 +62,6 @@ async function login() {
 
     <button class="btn-acess" @click="login">Acessar {{ userButtonLabel }}</button>
   </span>
-
-  <ErrorMenssage :error="meuErro"></ErrorMenssage>
 </template>
 
 <!-- STYLE -->
