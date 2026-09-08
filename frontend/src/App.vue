@@ -1,7 +1,17 @@
-<script setup></script>
+<script setup>
+import { useError } from './shared/composables/useError.js'
+import ErrorMenssage from './shared/components/ErrorMenssage.vue'
+
+const error = useError()
+
+const dropError = () => {
+  error.error.value = null
+}
+</script>
 
 <template>
   <main>
+    <ErrorMenssage :error="error.error.value" @finish-timeout="dropError"></ErrorMenssage>
     <RouterView></RouterView>
   </main>
 </template>
