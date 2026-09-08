@@ -6,18 +6,22 @@ import InputText from '@/shared/components/InputText.vue'
 import imgEnfermeira from '../../assets/enfermeira_256x256_pc.png'
 import imgPaciente from '../../assets/paciente_256x256_pc.png'
 import { findByCpf } from '../../shared/services/pacienteServices'
+import ErrorMenssage from '@/shared/components/ErrorMenssage.vue'
 
 const route = useRoute()
 
 const router = useRouter()
 
+const meuErro = ref('');
+
 // route.params.tipo
 const userType = route.params.tipo
 
 if (userType !== 'paciente' && userType !== 'profissional') {
-  // Redirecionar para a página inicial ou exibir uma mensagem de erro
+  // Exibir uma mensagem de erro
   console.error('Tipo de usuário inválido:', userType)
 
+  // Redirecionar para a página inicial 
   router.push('/')
 }
 
@@ -37,6 +41,7 @@ async function login() {
     } catch (error) {
       //melhorar como mostra o erro, ToDo: ou pop-up ou msg em baixo do botão
       console.log('ERROR: ' + error.response.data.mensagem)
+      meuErro.value = error.response.data.mensagem
     }
   } else if (userType === 'profissional') {
     // TODO: implementar login do profissional
@@ -59,6 +64,8 @@ async function login() {
 
     <button class="btn-acess" @click="login">Acessar {{ userButtonLabel }}</button>
   </span>
+
+  <ErrorMenssage :error="meuErro"></ErrorMenssage>
 </template>
 
 <!-- STYLE -->
